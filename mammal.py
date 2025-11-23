@@ -6,3 +6,11 @@ ID: 110369235
 Username: chaay144
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+from animal import Animal
+
+class Mammal(Animal):
+    def make_sound(self):
+        print(self.get_name() + " says roar.")
+
+    def feed_milk(self):
+        print(self.get_name() + " is feeding milk to its young.")
