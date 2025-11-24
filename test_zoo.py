@@ -42,6 +42,7 @@ class TestZooSystem(unittest.TestCase):
         self.zoo.add_animal_to_enclosure(self.lion, "Savannah")
         self.zoo.add_animal_to_enclosure(self.snake, "Reptile House")
         self.zoo.add_animal_to_enclosure(self.parrot, "Aviary")
+        # Make sure the species data stays correct
         self.assertEqual(self.lion.get_species(), "Lion")
         self.assertEqual(self.snake.get_species(), "Snake")
         self.assertEqual(self.parrot.get_species(), "Parrot")
@@ -51,11 +52,13 @@ class TestZooSystem(unittest.TestCase):
         self.keeper.perform_duty("feed", self.lion)
         self.vet.perform_duty("check", self.snake)
         self.keeper.perform_duty("clean", "Reptile House")
+        # Confirm the roles are stored correctly
         self.assertEqual(self.keeper.get_role(), "Zookeeper")
         self.assertEqual(self.vet.get_role(), "Veterinarian")
 
     def test_make_sound_polymorphism(self):
         """Each animal type uses its own sound method."""
+        # make_sound returns None because it only prints output
         self.assertIsNone(self.lion.make_sound())
         self.assertIsNone(self.snake.make_sound())
         self.assertIsNone(self.parrot.make_sound())
@@ -64,11 +67,13 @@ class TestZooSystem(unittest.TestCase):
     def test_sick_animal_movement_blocked(self):
         """Animals with health issues should not move."""
         self.lion.add_health_issue("Injury", "Medium", "Rest 7 days")
+        # Since the lion is now sick, the zoo should block the move
         self.zoo.add_animal_to_enclosure(self.lion, "Aviary")  # should not move
 
     def test_daily_routine(self):
         """Daily routine runs successfully."""
         self.zoo.daily_routine()
+        # If no crash happens, the test passes
         self.assertTrue(True)  # passes if no crash or error
 
     def test_reports(self):
